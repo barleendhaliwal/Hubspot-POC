@@ -26,7 +26,7 @@ export class OAuthHubSpotService {
       CLIENT_ID,
       CLIENT_SECRET,
     );
-    console.log(res);
+    console.log('RECEIVED ACCESS TOKEN');
     exp = Date.now() + res.expiresIn * 1000;
     refreshToken = res.refreshToken;
     accessToken = res.accessToken;

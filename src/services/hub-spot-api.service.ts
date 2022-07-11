@@ -66,7 +66,6 @@ export class HubSpotApiService {
         'deals',
         salesPipeline!.id,
       );
-    console.log(allStages);
     const stages = allStages.results.filter(
       stage =>
         stage.label === 'Proposal Made' ||
@@ -75,7 +74,6 @@ export class HubSpotApiService {
         stage.label === 'Closed Won',
     );
     return stages;
-    //  await hubspotClient.crm.pipelines.pipelineStagesApi.getAll()
   }
 
   async checkAndUpdateAccessToken() {
