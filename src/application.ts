@@ -11,7 +11,7 @@ import path from 'path';
 import {MySequence} from './sequence';
 
 export {ApplicationConfig};
-
+require('dotenv').config();
 export class HubspotPocApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {

@@ -6,9 +6,9 @@ const GRANT_TYPES = {
   AUTHORIZATION_CODE: 'authorization_code',
   REFRESH_TOKEN: 'refresh_token',
 };
-const REDIRECT_URI = `http://localhost:3000/oauth-callback`;
-const CLIENT_ID = '562ed87b-84eb-429d-8003-36c20a7270b7';
-const CLIENT_SECRET = '219dd759-16b4-48a0-be45-b3ad48f720f6';
+const REDIRECT_URI = process.env.REDIRECT_URI;
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
 export let refreshToken = '';
 export let accessToken = '';
 export let exp: number;

@@ -71,7 +71,8 @@ export class PocController {
     );
 
     //save to db
-    this.clientRepository.create({
+    const updateClient = await this.clientRepository.exists(clientInfo.id);
+    const paylaodClient = {
       id: clientInfo.id,
       city: clientInfo.properties.city,
       email: clientInfo.properties.email,
@@ -80,8 +81,15 @@ export class PocController {
       createdAt: clientInfo.createdAt,
       updatedAt: clientInfo.updatedAt,
       archived: clientInfo.archived,
-    });
-    this.companyRepository.create({
+    };
+    if (updateClient) {
+      this.clientRepository.updateById(clientInfo.id, paylaodClient);
+    } else {
+      this.clientRepository.create(paylaodClient);
+    }
+
+    const updateCompany = await this.companyRepository.exists(companyInfo.id);
+    const paylaodCompany = {
       id: companyInfo.id,
       city: companyInfo.properties.city,
       domain: companyInfo.properties.domain,
@@ -89,9 +97,15 @@ export class PocController {
       archived: companyInfo.archived,
       updatedAt: companyInfo.updatedAt,
       createdAt: companyInfo.createdAt,
-    });
+    };
+    if (updateCompany) {
+      this.companyRepository.updateById(companyInfo.id, paylaodCompany);
+    } else {
+      this.companyRepository.create(paylaodCompany);
+    }
 
-    this.dealRepository.create({
+    const dealUpdate = await this.dealRepository.exists(dealInfo.id);
+    const payloadDeal = {
       id: dealInfo.id,
       createdAt: dealInfo.createdAt,
       updatedAt: dealInfo.updatedAt,
@@ -102,7 +116,12 @@ export class PocController {
       archived: dealInfo.archived,
       companyId: companyInfo.id,
       clientId: clientInfo.id,
-    });
+    };
+    if (dealUpdate) {
+      this.dealRepository.updateById(dealInfo.id, payloadDeal);
+    } else {
+      this.dealRepository.create(payloadDeal);
+    }
     console.log(
       '***************SAVED DEAL INFORMATION************\n',
       dealInfo,
